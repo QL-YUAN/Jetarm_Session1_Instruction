@@ -19,8 +19,9 @@ R & t \\
 $$
 
 where:
-- $$\( R \in \mathbb{R}^{3 \times 3} \) $$ is a rotation matrix
-- $$\( t \in \mathbb{R}^{3} \)$$ is a translation vector
+
+- $R \in \mathbb{R}^{3 \times 3}$ is a rotation matrix  
+- $t \in \mathbb{R}^{3}$ is a translation vector  
 
 Such matrices allow transformations to be **composed using matrix multiplication**.
 
@@ -30,7 +31,7 @@ Such matrices allow transformations to be **composed using matrix multiplication
 
 ```python
 def T44(R, t):
-```
+````
 
 This function constructs a **4×4 homogeneous transformation matrix** from:
 
@@ -47,7 +48,7 @@ This function constructs a **4×4 homogeneous transformation matrix** from:
 $$
 T =
 \begin{bmatrix}
-R & t \\
+R & t \
 0 & 1
 \end{bmatrix}
 $$
@@ -69,7 +70,7 @@ For a transformation:
 $$
 T =
 \begin{bmatrix}
-R & t \\
+R & t \
 0 & 1
 \end{bmatrix}
 $$
@@ -79,7 +80,7 @@ The inverse is:
 $$
 T^{-1} =
 \begin{bmatrix}
-R^T & -R^T t \\
+R^{T} & -R^{T} t \
 0 & 1
 \end{bmatrix}
 $$
@@ -101,7 +102,7 @@ The script first demonstrates how to convert a ROS `geometry_msgs/Pose` into a h
 ### Steps
 
 1. Define a `Pose` with position and orientation
-2. Extract translation ((x, y, z))
+2. Extract translation $(x, y, z)$
 3. Convert quaternion orientation to a rotation matrix using `tf.transformations`
 4. Construct the final 4×4 transformation matrix
 
@@ -127,7 +128,7 @@ tft.rotation_matrix(angle, axis)
 
 Example:
 
-* Rotation of −90° about the Z-axis
+* Rotation of $-90^\circ$ about the Z-axis
 * Small correction rotation about the X-axis
 
 These rotations are combined using matrix multiplication to form a final rotation matrix.
@@ -145,7 +146,7 @@ $$
 $$
 
 * Rotation: Z-axis and X-axis rotations
-* Translation: ([-0.045, 0, 0.02]) meters
+* Translation: $[-0.045, 0, 0.02]$ meters
 
 ### End-Effector in `link5` frame
 
@@ -153,8 +154,8 @@ $$
 {}^{\text{link5}}T_{\text{eef}}
 $$
 
-* Rotation: −90° about the Y-axis
-* Translation: ([0, 0, 0.11054687369]) meters
+* Rotation: $-90^\circ$ about the Y-axis
+* Translation: $[0, 0, 0.11054687369]$ meters
 
 These transforms are constructed using the `T44` utility.
 
@@ -208,75 +209,76 @@ This example provides a clear and practical demonstration of:
 
 These operations form the mathematical backbone of modern robotic perception and manipulation systems.
 
+---
+
 ## Python Code
-```
+
+```python
 import numpy as np
 from geometry_msgs.msg import Pose
 import tf.transformations as tft
 
 
-def T44(R,t):
-	T = np.hstack((R, t))  # Combine rotation and translation to the left side
-	T = np.vstack((T, np.array([0, 0, 0, 1])))  # Add the bottom row for homogeneous coordinates
-	return T
+def T44(R, t):
+    T = np.hstack((R, t))
+    T = np.vstack((T, np.array([0, 0, 0, 1])))
+    return T
+
+
 def inv_T44(T2):
-	R2_inv = T2[:3, :3].T  # Transpose of the rotation matrix
-	t2_inv = -np.dot(R2_inv, T2[:3, 3])  # Negated rotated translation
+    R2_inv = T2[:3, :3].T
+    t2_inv = -np.dot(R2_inv, T2[:3, 3])
 
-	# Construct the inverse homogeneous transformation matrix
-	T2_inv = np.hstack((R2_inv, t2_inv.reshape(3, 1)))  # Add inverse translation
-	T2_inv = np.vstack((T2_inv, np.array([0, 0, 0, 1])))  # Add homogeneous row
+    T2_inv = np.hstack((R2_inv, t2_inv.reshape(3, 1)))
+    T2_inv = np.vstack((T2_inv, np.array([0, 0, 0, 1])))
 
-	return T2_inv
+    return T2_inv
+
 
 if __name__ == '__main__':
-	# Demo: Pose to T44 Homogenous Transformation Matrix
-	p1=Pose()
-	p1.position.x=0.1
-	p1.position.y=0.1
-	p1.position.z=0.1
-	p1.orientation.w=1			
-	print(p1)
-	translation = np.array([p1.position.x, 
-	p1.position.y, 
-	p1.position.z])
+    p1 = Pose()
+    p1.position.x = 0.1
+    p1.position.y = 0.1
+    p1.position.z = 0.1
+    p1.orientation.w = 1
 
-	quaternion = np.array([p1.orientation.x,
-	p1.orientation.y,
-	p1.orientation.z,
-	p1.orientation.w,])
+    translation = np.array([
+        p1.position.x,
+        p1.position.y,
+        p1.position.z
+    ])
 
-	# Convert quaternion to rotation matrix using tf.transformations
-	R = tft.quaternion_matrix(quaternion)[:3, :3]  # Get only the 3x3 rotation matrix part
-	# Create the homogeneous transformation matrix
-	T = np.eye(4)  # Start with the identity matrix
-	T[:3, :3] = R  # Set the rotation part
-	T[:3, 3] = translation  # Set the translation part
-	
-	print(T)	
-	
-	
-	## Demo how to convert rotation angle to rotation matrix
-	R_camera_in_link5=np.dot(tft.rotation_matrix(np.radians(-90), [0, 0, 1]) , tft.rotation_matrix(-0.1, [1, 0, 0]))[:3, :3]
-	print(R_camera_in_link5)
+    quaternion = np.array([
+        p1.orientation.x,
+        p1.orientation.y,
+        p1.orientation.z,
+        p1.orientation.w,
+    ])
 
-	P_camera_in_link5=np.array([[-0.045],[0],[0.02]])
-	R1=R_camera_in_link5
-	t1=P_camera_in_link5
-	# T_camera_in_link5
-	T_camera_in_link5 = T44(R1,t1)
-		
-	R_eef_in_link5=tft.rotation_matrix(np.radians(-90), [0, 1, 0])[:3, :3]
-	print(R_eef_in_link5)
-	P_eef_in_link5=np.array([[0.0],[0.0],[0.11054687369]])
-	# Now, let's say we have another transformation T2
-	R2 = R_eef_in_link5
-	t2 = P_eef_in_link5
-	T_eef_in_link5 = T44(R2,t2)
+    R = tft.quaternion_matrix(quaternion)[:3, :3]
 
+    T = np.eye(4)
+    T[:3, :3] = R
+    T[:3, 3] = translation
 
-	# Matrix multiplication (homogeneous transformation multiplication)
-	T_camera_in_eef = np.dot(inv_T44(T_eef_in_link5), T_camera_in_link5)
-	print(T_camera_in_eef)	
+    print(T)
+
+    R_camera_in_link5 = np.dot(
+        tft.rotation_matrix(np.radians(-90), [0, 0, 1]),
+        tft.rotation_matrix(-0.1, [1, 0, 0])
+    )[:3, :3]
+
+    P_camera_in_link5 = np.array([[-0.045], [0], [0.02]])
+    T_camera_in_link5 = T44(R_camera_in_link5, P_camera_in_link5)
+
+    R_eef_in_link5 = tft.rotation_matrix(np.radians(-90), [0, 1, 0])[:3, :3]
+    P_eef_in_link5 = np.array([[0.0], [0.0], [0.11054687369]])
+    T_eef_in_link5 = T44(R_eef_in_link5, P_eef_in_link5)
+
+    T_camera_in_eef = np.dot(
+        inv_T44(T_eef_in_link5),
+        T_camera_in_link5
+    )
+
+    print(T_camera_in_eef)
 ```
-
