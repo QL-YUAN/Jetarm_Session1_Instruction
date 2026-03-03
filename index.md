@@ -1,7 +1,7 @@
 # JetArm Kinematics Related Topics Instruction
 
 ## 0. Python Basic Tutorial
-[Python Basic Tutorial](python_tutorial_for _beginners.md)
+[Python Basic Tutorial](python_tutorial_for_beginners.md)
 
 ## 1. Kinematics Warm Ups
 [JetArm Kinematics Calculation Related Topics Introduction](Kinematics_Calculation_Related_Topics_Introduction.md)
