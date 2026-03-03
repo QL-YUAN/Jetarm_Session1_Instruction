@@ -6,7 +6,7 @@
 
 1. Verify installation:
 
-```bash id="install-check"
+```bash
 python --version
 ```
 
@@ -23,14 +23,14 @@ Python 3.11.2
 **Step 1:** Open a text editor (VS Code, Notepad, or gedit).
 **Step 2:** Type the following:
 
-```python id="hello-py"
+```python
 print("Hello, world!")
 ```
 
 **Step 3:** Save as `hello.py`.
 **Step 4:** Run in terminal/command prompt:
 
-```bash id="run-hello"
+```bash
 python hello.py
 ```
 
@@ -46,7 +46,7 @@ Hello, world!
 
 **Code (`variables.py`):**
 
-```python id="variables"
+```python
 name = "Alice"
 age = 25
 height = 5.6
@@ -57,7 +57,7 @@ print(name, age, height, is_student)
 
 **Run:**
 
-```bash id="run-variables"
+```bash
 python variables.py
 ```
 
@@ -73,7 +73,7 @@ Alice 25 5.6 True
 
 **Code (`lists_tuples.py`):**
 
-```python id="lists-tuples"
+```python
 # List (mutable)
 fruits = ["apple", "banana", "cherry"]
 fruits.append("orange")
@@ -88,7 +88,7 @@ print("First color:", colors[0])
 
 **Run:**
 
-```bash id="run-lists-tuples"
+```bash
 python lists_tuples.py
 ```
 
@@ -106,7 +106,7 @@ First color: red
 
 **Code (`dict_example.py`):**
 
-```python id="dict-example"
+```python
 student = {"name": "Alice", "age": 25, "is_student": True}
 
 print("Name:", student["name"])
@@ -117,7 +117,7 @@ print("Updated student:", student)
 
 **Run:**
 
-```bash id="run-dict"
+```bash
 python dict_example.py
 ```
 
@@ -134,7 +134,7 @@ Updated student: {'name': 'Alice', 'age': 26, 'is_student': True, 'grade': 'A'}
 
 **Code (`if_example.py`):**
 
-```python id="if-example"
+```python
 age = 20
 
 if age >= 18:
@@ -145,7 +145,7 @@ else:
 
 **Run:**
 
-```bash id="run-if"
+```bash
 python if_example.py
 ```
 
@@ -161,7 +161,7 @@ You are an adult.
 
 **Code (`loops.py`):**
 
-```python id="loops"
+```python
 # For loop
 for i in range(3):
     print("For loop:", i)
@@ -175,7 +175,7 @@ while count < 3:
 
 **Run:**
 
-```bash id="run-loops"
+```bash
 python loops.py
 ```
 
@@ -196,7 +196,7 @@ While loop: 2
 
 **Code (`functions.py`):**
 
-```python id="functions"
+```python
 def greet(name):
     return f"Hello, {name}!"
 
@@ -206,7 +206,7 @@ print(greet("Bob"))
 
 **Run:**
 
-```bash id="run-functions"
+```bash
 python functions.py
 ```
 
@@ -223,7 +223,7 @@ Hello, Bob!
 
 **Code (`file_io.py`):**
 
-```python id="file-io"
+```python
 # Write to file
 with open("example.txt", "w") as f:
     f.write("Hello, world!\n")
@@ -237,7 +237,7 @@ with open("example.txt", "r") as f:
 
 **Run:**
 
-```bash id="run-file"
+```bash
 python file_io.py
 ```
 
@@ -255,7 +255,7 @@ Python is fun!
 
 **Code (`classes.py`):**
 
-```python id="classes"
+```python
 class Student:
     def __init__(self, name, age):
         self.name = name
@@ -273,7 +273,7 @@ student2.greet()
 
 **Run:**
 
-```bash id="run-classes"
+```bash
 python classes.py
 ```
 
@@ -290,7 +290,7 @@ Hello, my name is Bob and I am 22 years old.
 
 **Code (`student_records.py`):**
 
-```python id="student-records"
+```python
 class Student:
     def __init__(self, name, age, grade):
         self.name = name
@@ -319,7 +319,7 @@ with open("students.txt", "r") as f:
 
 **Run:**
 
-```bash id="run-student-records"
+```bash
 python student_records.py
 ```
 
