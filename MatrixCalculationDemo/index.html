@@ -1084,10 +1084,10 @@
 <p>A homogeneous transformation matrix represents both <strong>rotation</strong> and <strong>translation</strong> in a single 4×4 matrix:</p>
 <div class="arithmatex">\[
 T =
-\begin{bmatrix}
+\begin{pmatrix}
 R &amp; t \\
 0 &amp; 1
-\end{bmatrix}
+\end{pmatrix}
 \]</div>
 <p>where:</p>
 <ul>
@@ -1114,10 +1114,10 @@ R &amp; t \\
 
 <span class="err">$$</span>
 <span class="n">T</span> <span class="o">=</span>
-\<span class="n">begin</span><span class="p">{</span><span class="n">bmatrix</span><span class="p">}</span>
-<span class="n">R</span> <span class="o">&amp;</span> <span class="n">t</span> \
+\<span class="n">begin</span><span class="p">{</span><span class="n">pmatrix</span><span class="p">}</span>
+<span class="n">R</span> <span class="o">&amp;</span> <span class="n">t</span> \\
 <span class="mi">0</span> <span class="o">&amp;</span> <span class="mi">1</span>
-\<span class="n">end</span><span class="p">{</span><span class="n">bmatrix</span><span class="p">}</span>
+\<span class="n">end</span><span class="p">{</span><span class="n">pmatrix</span><span class="p">}</span>
 <span class="err">$$</span>
 
 <span class="o">---</span>
@@ -1132,18 +1132,18 @@ R &amp; t \\
 <p>For a transformation:</p>
 <div class="arithmatex">\[
 T =
-\begin{bmatrix}
-R &amp; t \
+\begin{pmatrix}
+R &amp; t \\
 0 &amp; 1
-\end{bmatrix}
+\end{pmatrix}
 \]</div>
 <p>The inverse is:</p>
 <div class="arithmatex">\[
 T^{-1} =
-\begin{bmatrix}
-R^{T} &amp; -R^{T} t \
+\begin{pmatrix}
+R^{T} &amp; -R^{T} t \\
 0 &amp; 1
-\end{bmatrix}
+\end{pmatrix}
 \]</div>
 <h3 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1420,6 +1420,8 @@ R^{T} &amp; -R^{T} t \
     
     
       <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
       
     
   </body>
